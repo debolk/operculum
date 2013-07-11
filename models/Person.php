@@ -1,7 +1,7 @@
 <?php
 class Person extends ActiveRecord\Model
 {
-    static $validates_precense_of = array(
+    static $validates_presence_of = array(
         array('uid'),
         array('alive')
     );
