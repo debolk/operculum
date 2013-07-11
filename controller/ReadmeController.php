@@ -6,6 +6,7 @@ class ReadmeController extends Tonic\Resource
 {
     /**
      * @method GET
+     * Shows the README.md
      */
     public function getIndex()
     {

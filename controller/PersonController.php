@@ -31,6 +31,7 @@ class PersonController extends Tonic\Resource
     /**
      * @method PUT
      * @loggedIn bestuur
+     * Replaces the person with new data
      */
     public function putPerson($uid)
     {
@@ -59,6 +60,7 @@ class PersonController extends Tonic\Resource
     /**
      * @method PATCH
      * @loggedIn bestuur
+     * Changes a few attributes of a person
      */
     public function patchPerson($uid)
     {
