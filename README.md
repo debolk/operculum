@@ -44,3 +44,6 @@ PATCH /person/jdoe?access_token=2d21970896a72d1ebee2d3c2a0347d57f48dbf7b
 1. Execute `php ./composer.phar install --no-dev --optimize-autoloader` in the project root to install all dependencies using [Composer](http://getcomposer.org/).
 1. Copy web/.htaccess.example to web/.htaccess and adapt as needed.
 1. Point an apache virtual host to the ./web directory (containing .htaccess and dispatch.php).
+
+## Testing
+Blip is tested using [Codeception](http://codeception.com/). Testcases are stored in ./test.
