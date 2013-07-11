@@ -4,6 +4,9 @@
  */
 class PersonController extends Tonic\Resource
 {
+    /**
+     * Check if user is authorized to use the api
+     */
     public function loggedIn($resource)
     {
         $unauthorized = OAuth2Helper::IsUnauthorized('bestuur');
@@ -14,6 +17,7 @@ class PersonController extends Tonic\Resource
 
     /**
      * @method GET
+     * Returns json representation of person
      */
     public function getPerson($uid)
     {

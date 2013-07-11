@@ -2,7 +2,7 @@
 /**
  * @uri /
  */
-class Readme extends Tonic\Resource
+class ReadmeController extends Tonic\Resource
 {
     /**
      * @method GET
