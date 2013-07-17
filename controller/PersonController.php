@@ -28,6 +28,18 @@ class PersonController extends Tonic\Resource
         return $person->to_json();
     }
 
+		/**
+		 * @method OPTIONS
+		 * Returns acceptible methods
+		 */
+		public function options($uid)
+		{
+			$response = new Tonic\Response(200, "");
+			$response->Allow = "GET,HEAD,PUT,PATCH";
+			$response->AccessControlAllowMethods = "GET,HEAD,PUT,PATCH";
+			return $response;
+		}
+
     /**
      * @method PUT
      * @loggedIn bestuur

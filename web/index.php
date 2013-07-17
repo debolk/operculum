@@ -20,6 +20,9 @@ $request = new Tonic\Request();
 $resource = $app->getResource($request);
 
 $response = $resource->exec();
+
 if($response->contentType == 'text/html')
   $response->contentType = 'application/json';
+$response->AccessControlAllowOrigin = '*';
+
 $response->output();
