@@ -57,7 +57,11 @@ class PersonController extends Tonic\Resource
         $person = new Person;
         foreach($data as $key => $value)
             if(isset($person->$key))
+						{
                 $person->$key = $value;
+								if($person->$key == null)
+									return new Tonic\Response(400, '{"error":"validation_error","error_description":["' . $key . ' is not valid!"]}');
+						}
 
         if(!$person->is_valid())
             return new Tonic\Response(400, '{"error":"validation_error","error_description":' . json_encode($person->errors->full_messages()) . '}');
@@ -65,6 +69,7 @@ class PersonController extends Tonic\Resource
         $old = Person::find_by_uid($uid);
         if($old)
             $old->delete();
+
         $person->save();
         return $person->to_json();
     }
@@ -90,7 +95,11 @@ class PersonController extends Tonic\Resource
         //Set values
         foreach($data as $key => $value)
             if(isset($person->$key))
+						{
                 $person->$key = $value;
+								if($person->$key == null)
+									return new Tonic\Response(400, '{"error":"validation_error","error_description":["' . $key . ' is not valid!"]}');
+						}
         
         if(!$person->is_valid())
             return new Tonic\Response(400, '{"error":"validation_error","error_description":' . json_encode($person->errors->full_messages()) . '}');
