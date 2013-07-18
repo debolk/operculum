@@ -51,6 +51,9 @@ class PersonController extends Tonic\Resource
         if(!$data)
             return new Tonic\Response(400, '{"error":"bad_request","error_description":"The json data could not be parsed"};');
 
+				if(!isset($data->uid))
+					$data->uid = $uid;
+
         if($data->uid != $uid)
             return new Tonic\Response(400, '{"error":"validation_error","error_description":["Uid is not the same as resource uid"]}');
 
@@ -59,7 +62,7 @@ class PersonController extends Tonic\Resource
             if(isset($person->$key))
 						{
                 $person->$key = $value;
-								if($person->$key == null)
+								if($person->$key == null && !empty($value))
 									return new Tonic\Response(400, '{"error":"validation_error","error_description":["' . $key . ' is not valid!"]}');
 						}
 
@@ -89,7 +92,7 @@ class PersonController extends Tonic\Resource
         if(!$data)
             return new Tonic\Response(400, '{"error":"bad_request","error_description":"The json data could not be parsed"};');
 
-        if(isseT($data->uid) && $data->uid != $uid)
+        if(isset($data->uid) && $data->uid != $uid)
             return new Tonic\Response(400, '{"error":"validation_error","error_description":["Uid is not the same as resource uid"]}');
 
         //Set values
@@ -97,7 +100,7 @@ class PersonController extends Tonic\Resource
             if(isset($person->$key))
 						{
                 $person->$key = $value;
-								if($person->$key == null)
+								if($person->$key == null && !empty($value))
 									return new Tonic\Response(400, '{"error":"validation_error","error_description":["' . $key . ' is not valid!"]}');
 						}
         

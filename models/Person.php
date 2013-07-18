@@ -22,6 +22,12 @@ class Person extends ActiveRecord\Model
                 unset($data[$key]);
 
         $data['alive'] = @$data['alive']?true:false;
+				
+				// Format dates as yyyy-mm-dd
+				$fields = array('inauguration', 'resignation_letter', 'resignation');
+				foreach($fields as $field)
+					if(isset($data[$field]))
+						$data[$field] = strftime('%Y-%m-%d', strtotime($data[$field]));
 
         return json_encode($data);
     }
