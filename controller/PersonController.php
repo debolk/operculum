@@ -5,18 +5,19 @@
 class PersonController extends Tonic\Resource
 {
     /**
-     * Check if user is authorized to use the api
+     * Check if the user can access an access level resource
+     * @param  Tonic\Resource $resource can be any valid access level resource
+     *                                  bekend (default), bestuur, ictcom, lid or mp3control
+     * @return boolean
      */
-    public function loggedIn($resource)
+    public function loggedIn($resource = 'bekend')
     {
-        $unauthorized = OAuth2Helper::IsUnauthorized('bestuur');
-        if($unauthorized)
-            return $unauthorized;
-        return true;
+        return OAuth2Helper::isAuthorisedFor($resource);
     }
 
     /**
      * @method GET
+     * @loggedIn lid
      * Returns json representation of person
      */
     public function getPerson($uid)
@@ -103,7 +104,7 @@ class PersonController extends Tonic\Resource
 								if($person->$key == null && !empty($value))
 									return new Tonic\Response(400, '{"error":"validation_error","error_description":["' . $key . ' is not valid!"]}');
 						}
-        
+
         if(!$person->is_valid())
             return new Tonic\Response(400, '{"error":"validation_error","error_description":' . json_encode($person->errors->full_messages()) . '}');
 

@@ -1,9 +1,12 @@
 <?php
 class OAuth2Helper {
+
     /**
-     * Returns false if the user is Authorized or returns a Tonic Response stating the error
+     * Return a boolean whether the user can access a resource
+     * @param  string  $resource a valid access level resource
+     * @return boolean           true if access was granted, false otherwise
      */
-    public static function IsUnauthorized($resource)
+    public static function isAuthorisedFor($resource)
     {
         if(isset($_POST['access_token']))
             $access_token = $_POST['access_token'];
@@ -17,14 +20,14 @@ class OAuth2Helper {
 
         $c = curl_init($path);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-        
+
         $body = curl_exec($c);
 
         $code = curl_getinfo($c, CURLINFO_HTTP_CODE);
         curl_close($c);
 
         if($code == 200)
-            return false;
+            return true;
 
         return new Tonic\Response($code, $body);
     }
