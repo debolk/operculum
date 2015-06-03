@@ -3,3 +3,5 @@ SetEnv OAUTH2_RESOURCE        https://example.com/resource
 
 RewriteEngine on
 RewriteRule .* index.php
+
+Header add Strict-Transport-Security "max-age=15768000;includeSubDomains"
